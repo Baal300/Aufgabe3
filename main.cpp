@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-    Liste<char> liste;
+    Liste<int> liste;
     liste.menu();
     liste.print();
    // liste.ins(5.4);

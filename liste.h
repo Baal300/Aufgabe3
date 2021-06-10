@@ -106,9 +106,34 @@ public:
         }
         else
         {
-            m_currentElement->m_nextElement = newItem;  //We want to add a node next to our position pointer
-            newItem->m_prevElement = m_currentElement; //Position pointer becomes previous node of new node
-            m_currentElement = m_currentElement->m_nextElement; //The new item/node is our position pointer now
+            //Sort list
+            m_currentElement = m_firstElement;
+            while(true)
+            {
+                if(newItem->m_information < m_currentElement->m_information)
+                {
+                    newItem->m_prevElement = m_currentElement->m_prevElement;
+                    newItem->m_nextElement = m_currentElement;
+                    m_currentElement->m_prevElement = newItem;
+                    m_currentElement = newItem;       //Insert our new element before the compared element if it's smaller
+
+                    if(m_currentElement->m_prevElement != nullptr){    //If there was a previous element to our compared element it gets the new item as next element
+                        m_currentElement->m_prevElement->m_nextElement = m_currentElement;
+                    }
+                    break;
+                }
+                if(end()){  //Element is inserted at the end if it's greater than all other elements
+                    m_currentElement->m_nextElement = newItem;  //We want to add a node next to our position pointer
+                    newItem->m_prevElement = m_currentElement; //Position pointer becomes previous node of new node
+                    m_currentElement = newItem; //The new item/node is our position pointer now
+                    break;
+                }
+                m_currentElement = m_currentElement->m_nextElement;  //Check next element
+            }
+
+            if(newItem->m_prevElement == nullptr){  //In case the new element got inserted at the beginning
+                m_firstElement = newItem;
+            }
 
             if(m_currentElement->m_nextElement == nullptr){ //If the next element of our new element is null, it is our last element
                 m_lastElement = m_currentElement;

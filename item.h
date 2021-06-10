@@ -23,36 +23,43 @@ public:
 
     template<class listeT>
     friend class Liste;
+    friend bool operator==(Item<T> a, Item<T> b);
+    friend bool operator<(Item<T> a, Item<T> b);
+    friend bool operator>(Item<T> a, Item<T> b);
+    friend bool operator<=(Item<T> a, Item<T> b);
+    friend bool operator>=(Item<T> a, Item<T> b);           //friend template declaration don't work???
 };
 
 template<typename T>
 bool operator==(Item<T> a, Item<T> b)
 {
-    return a.value == b.value;
+    return a.m_information == b.m_information;
 }
 
 template<typename T>
 bool operator<(Item<T> a, Item<T> b)
 {
-    return a.value < b.value;
+    return a.m_information < b.m_information;
 }
 
 template<typename T>
 bool operator>(Item<T> a, Item<T> b)
 {
-    return a.value > b.value;
+    return a.m_information > b.m_information;
 }
 
 template<typename T>
 bool operator<=(Item<T> a, Item<T> b)
 {
-    return a.value <= b.value;
+    return a.m_information <= b.m_information;
 }
 
 template<typename T>
 bool operator>=(Item<T> a, Item<T> b)
 {
-    return a.value >= b.value;
+    return a.m_information >= b.m_information;
 }
+
+
 
 #endif // ITEM_H
