@@ -9,7 +9,8 @@ class Item
 {
 private:
     T m_information;
-    Item* m_nextElement;   //If there is no next element = nullptr
+    Item* m_prevElement{nullptr};
+    Item* m_nextElement{nullptr};   //If there is no next element = nullptr
 public:
     Item(){ };
     Item(T value) : m_information(value) { };
@@ -23,5 +24,35 @@ public:
     template<class listeT>
     friend class Liste;
 };
+
+template<typename T>
+bool operator==(Item<T> a, Item<T> b)
+{
+    return a.value == b.value;
+}
+
+template<typename T>
+bool operator<(Item<T> a, Item<T> b)
+{
+    return a.value < b.value;
+}
+
+template<typename T>
+bool operator>(Item<T> a, Item<T> b)
+{
+    return a.value > b.value;
+}
+
+template<typename T>
+bool operator<=(Item<T> a, Item<T> b)
+{
+    return a.value <= b.value;
+}
+
+template<typename T>
+bool operator>=(Item<T> a, Item<T> b)
+{
+    return a.value >= b.value;
+}
 
 #endif // ITEM_H
